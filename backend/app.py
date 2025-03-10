@@ -23,7 +23,11 @@ def index():
 def generate_image():
     prompt = request.json.get("prompt")
     response = requests.post(image_api_url, json={"prompt": prompt})
-    return jsonify(response.json())
+    try:
+        response_json = response.json()
+    except ValueError:
+        return jsonify({"error": "Invalid response from image generation API"}), 500
+    return jsonify(response_json)
 
 @app.route("/generate-text", methods=["POST"])
 def generate_text():
