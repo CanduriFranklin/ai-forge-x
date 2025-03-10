@@ -1,3 +1,4 @@
+# This file is correctly located in the "models" folder.
 import os
 import json
 from openai import OpenAI

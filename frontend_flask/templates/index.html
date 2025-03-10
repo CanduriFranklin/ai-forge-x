@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Forge X</title>
+    <link rel="stylesheet" href="/static/Generate.css">
+</head>
+<body>
+    <div id="root">
+        <h1>Welcome to AI Forge X</h1>
+        <div id="query-section">
+            <h2>Queries</h2>
+            <textarea id="query-input" placeholder="Enter your query..."></textarea>
+            <button id="execute-query">Execute Query</button>
+        </div>
+        <div id="visualization-section">
+            <h2>Data Visualizations</h2>
+            <div id="visualization"></div>
+        </div>
+        <div id="export-section">
+            <h2>Export Data</h2>
+            <button id="export-csv">Export as CSV</button>
+            <button id="export-json">Export as JSON</button>
+        </div>
+        <div id="inference-section">
+            <h2>Inference Execution</h2>
+            <button id="execute-inference">Execute Inference</button>
+        </div>
+    </div>
+    <script src="/static/Generate.js"></script>
+</body>
+</html>

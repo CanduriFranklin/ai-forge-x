@@ -1,19 +1,10 @@
-from flask import Flask, request, jsonify, render_template, send_file
+﻿from flask import Flask, request, jsonify
 import requests
 from dotenv import load_dotenv
 import os
 import sys
 import logging
-import csv
-import json
-from io import StringIO
-
-# Ensure the openai module is installed
-try:
-    from openai import OpenAI
-except ImportError:
-    print("The openai module is not installed. Install it using 'pip install openai'")
-    sys.exit(1)
+from openai import OpenAI
 
 # Set the PYTHONPATH environment variable to include the models directory
 os.environ['PYTHONPATH'] = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models'))
@@ -21,17 +12,10 @@ os.environ['PYTHONPATH'] = os.path.abspath(os.path.join(os.path.dirname(__file__
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models')))
 sys.path.append('..')
 
-# sys.path adjustment correctly maps '..\models' to "c:\Users\Canduri Franklin\source\repos\ai-forge-x\models"
+from models.explanation_model import ExplanationModel
+from models.stable_diffusion import StableDiffusionModel
 
-# Ensure the ExplanationModel and StableDiffusionModel modules exist
-try:
-    from models.explanation_model import ExplanationModel
-    from models.stable_diffusion import StableDiffusionModel
-except ImportError as e:
-    print("Error importing modules: " + repr(e))
-    sys.exit(1)
-
-app = Flask(__name__, static_folder='../frontend_flask/static', template_folder='../frontend_flask/templates')
+app = Flask(__name__)
 
 load_dotenv()
 
@@ -51,7 +35,7 @@ client = OpenAI(
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return "Welcome to the AI Forge API!"
 
 @app.route("/generate-image", methods=["POST"])
 def generate_image():
@@ -107,41 +91,5 @@ def generate_image_openai():
     )
     return jsonify(response.to_json())
 
-@app.route("/execute-query", methods=["POST"])
-def execute_query():
-    query = request.json.get("query")
-    logging.debug(f"Executing query: {query}")
-    # Add code to execute the query and return the results
-    results = {"data": "Query results"}
-    return jsonify(results)
-
-@app.route("/export-csv", methods=["GET"])
-def export_csv():
-    data = [
-        {"column1": "value1", "column2": "value2"},
-        {"column1": "value3", "column2": "value4"}
-    ]
-    si = StringIO()
-    cw = csv.DictWriter(si, fieldnames=data[0].keys())
-    cw.writeheader()
-    cw.writerows(data)
-    output = si.getvalue()
-    return send_file(StringIO(output), mimetype="text/csv", as_attachment=True, attachment_filename="data.csv")
-
-@app.route("/export-json", methods=["GET"])
-def export_json():
-    data = [
-        {"column1": "value1", "column2": "value2"},
-        {"column1": "value3", "column2": "value4"}
-    ]
-    return jsonify(data)
-
-@app.route("/execute-inference", methods=["POST"])
-def execute_inference():
-    logging.debug("Executing inference")
-    # Add code to execute inference and return the results
-    results = {"data": "Inference results"}
-    return jsonify(results)
-
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True)

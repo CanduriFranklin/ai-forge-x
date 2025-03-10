@@ -13,3 +13,4 @@ class TestImageGeneration(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+# This file is in the "tests" folder, and importing from backend.app is valid.
