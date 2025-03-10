@@ -1,4 +1,5 @@
 import os
+import json
 from openai import OpenAI
 
 class StableDiffusionModel:
@@ -22,4 +23,7 @@ class StableDiffusionModel:
             },
             prompt=prompt
         )
-        return response.to_json()
+        response_json = response.json()  # Ensure the response is parsed as JSON
+        with open('image_response.json', 'w') as f:
+            json.dump(response_json, f, indent=4)
+        return response_json

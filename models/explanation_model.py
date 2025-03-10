@@ -1,4 +1,5 @@
 import os
+import json
 from openai import OpenAI
 
 class ExplanationModel:
@@ -19,4 +20,7 @@ class ExplanationModel:
             },
             messages=[{"role": "user", "content": prompt}]
         )
-        return response.to_json()
+        response_json = response.json()  # Ensure the response is parsed as JSON
+        with open('explanation_response.json', 'w') as f:
+            json.dump(response_json, f, indent=4)
+        return response_json

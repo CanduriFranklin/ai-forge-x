@@ -2,6 +2,16 @@ from flask import Flask, request, jsonify
 import requests
 from dotenv import load_dotenv
 import os
+import sys
+import logging
+from openai import OpenAI
+from backend.app import app
+
+# Set the PYTHONPATH environment variable to include the models directory
+os.environ['PYTHONPATH'] = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models'))
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models')))
+
 from models.explanation_model import ExplanationModel
 from models.stable_diffusion import StableDiffusionModel
 
@@ -15,6 +25,14 @@ text_api_url = os.getenv("NEBIUS_TEXT_API")
 explanation_model = ExplanationModel()
 stable_diffusion_model = StableDiffusionModel()
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+
+client = OpenAI(
+    base_url="https://api.studio.nebius.com/v1/",
+    api_key=os.environ.get("NEBIUS_API_KEY")
+)
+
 @app.route("/")
 def index():
     return "Welcome to the AI Forge API!"
@@ -22,10 +40,15 @@ def index():
 @app.route("/generate-image", methods=["POST"])
 def generate_image():
     prompt = request.json.get("prompt")
+    logging.debug(f"Received prompt: {prompt}")
+    logging.debug(f"Using image API URL: {image_api_url}")
     response = requests.post(image_api_url, json={"prompt": prompt})
+    logging.debug(f"External API response status: {response.status_code}")
+    logging.debug(f"External API response text: {response.text}")
     try:
         response_json = response.json()
     except ValueError:
+        logging.error("Invalid response from image generation API")
         return jsonify({"error": "Invalid response from image generation API"}), 500
     return jsonify(response_json)
 
@@ -49,6 +72,24 @@ def generate():
         return jsonify({"error": "Invalid model type"}), 400
 
     return jsonify({"result": result})
+
+@app.route("/generate-image-openai", methods=["POST"])
+def generate_image_openai():
+    prompt = request.json.get("prompt")
+    response = client.images.generate(
+        model="stability-ai/sdxl",
+        response_format="b64_json",
+        extra_body={
+            "response_extension": "webp",
+            "width": 1024,
+            "height": 1024,
+            "num_inference_steps": 30,
+            "negative_prompt": "",
+            "seed": -1
+        },
+        prompt=prompt
+    )
+    return jsonify(response.to_json())
 
 if __name__ == "__main__":
     app.run(debug=True)
