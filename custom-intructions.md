@@ -8,7 +8,7 @@ AI ForgeX Suite is a comprehensive platform offering transparent and customizabl
 Explainable Image Generator: To create images with step-by-step explanations.
 Transparent Language Model: To generate text with source attribution and style control.
 Key Features
-1. Explainable Image Generator
+# 1. Explainable Image Generator
 Functionality: Generates images from text prompts, explaining how each part of the prompt was interpreted and how the image was constructed step by step.
 Features:
 Visualization of the generation process (layers, colors, shapes).
@@ -121,5 +121,30 @@ temperature=0.6
 print(completion.to_json())
 Conclusion
 This project not only meets the hackathon requirements but also has the potential to positively impact how users interact with AI tools.
+
+## Project Setup Instructions
+
+The following steps outline how to set up the AI ForgeX Suite project:
+
+1. Create the root project directory:
+   - c:\Users\Canduri Franklin\source\repos\ai-forge-x
+
+2. Inside the root directory, create the following directories:
+   - backend (for the Python server, e.g., Flask/FastAPI code)
+   - frontend (for the interactive control panel using React.js or Vue.js)
+   - docs (for user guides and technical documentation)
+   - config (for deployment and configuration files)
+
+3. Initialize version control by running:
+   - git init
+
+4. Create initial configuration and dependency files:
+   - In the backend directory, create a file named requirements.txt and add dependencies (e.g., Flask or FastAPI, openai, etc.).
+   - In the frontend directory, create package.json (for npm dependencies and scripts).
+   - In the root directory, create a README.md for project documentation.
+
+5. (Optional) Create deployment scripts or configuration files (e.g., Dockerfile, .env) inside the config directory.
+
+6. Follow these instructions consistently to ensure a reproducible setup for both development and production environments.
 
 
