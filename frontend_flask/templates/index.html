@@ -1,33 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Forge X</title>
+    <title>AI ForgeX Suite</title>
     <link rel="stylesheet" href="/static/Generate.css">
 </head>
 <body>
     <div id="root">
-        <h1>Welcome to AI Forge X</h1>
-        <div id="query-section">
-            <h2>Queries</h2>
-            <textarea id="query-input" placeholder="Enter your query..."></textarea>
-            <button id="execute-query">Execute Query</button>
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <button class="tab" data-tab="welcome">Welcome</button>
+            <button class="tab" data-tab="playground">Playground</button>
+            <button class="tab" data-tab="export">Export</button>
         </div>
-        <div id="visualization-section">
-            <h2>Data Visualizations</h2>
-            <div id="visualization"></div>
-        </div>
-        <div id="export-section">
-            <h2>Export Data</h2>
-            <button id="export-csv">Export as CSV</button>
-            <button id="export-json">Export as JSON</button>
-        </div>
-        <div id="inference-section">
-            <h2>Inference Execution</h2>
-            <button id="execute-inference">Execute Inference</button>
+
+        <!-- Content -->
+        <div id="content">
+            <!-- Welcome Tab -->
+            <div id="welcome" class="tab-content active">
+                <div class="welcome-section">
+                    <h1>Welcome to AI Forge X</h1>
+                    <p>Our solution is your trust</p>
+                    <button class="register-button">Register with Service 1</button>
+                    <button class="register-button">Register with Service 2</button>
+                </div>
+            </div>
+
+            <!-- Playground Tab -->
+            <div id="playground" class="tab-content">
+                <h2>Playground</h2>
+                <div class="dashboard">
+                    <div class="dashboard-card model-card">
+                        <h2>Image Generator</h2>
+                        <p>Create images with step-by-step explanations.</p>
+                        <button class="generate-button">Generate Image</button>
+                    </div>
+                    <div class="dashboard-card model-card">
+                        <h2>Transparent Language Model</h2>
+                        <p>Generate text with font attribution and style control.</p>
+                        <button class="generate-button">Generate Text</button>
+                    </div>
+                </div>
+                <div id="trust-score">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <p>Trust Score: 85%</p>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div id="export" class="tab-content">
+                <h2>Export Data</h2>
+                <div id="export-section">
+                    <button class="export-button">Export as PDF</button>
+                    <button class="export-button">Export as Excel</button>
+                    <button class="export-button">Export as Word</button>
+                    <button class="export-button">Export as PNG</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Loading Animation Placeholder -->
+    <div id="loading-animation" class="loading-animation"></div>
+
+    <!-- Notification Placeholder -->
+    <div id="notification" class="notification"></div>
+
     <script src="/static/Generate.js"></script>
 </body>
 </html>

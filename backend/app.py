@@ -112,7 +112,7 @@ def execute_query():
     query = request.json.get("query")
     logging.debug(f"Executing query: {query}")
     # Add code to execute the query and return the results
-    results = {"data": "Query results"}
+    results = {"data": "Query results", "explanation": "Explanation of the results", "index": 1, "confidence_score": 0.95}
     return jsonify(results)
 
 @app.route("/export-csv", methods=["GET"])

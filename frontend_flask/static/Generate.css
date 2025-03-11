@@ -1,25 +1,71 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
     color: #333;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 #root {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #6a11cb, #2575fc);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(to right, #f4f4f4, #e0eafc);
+}
+
+.tab {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.tab:hover {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+    opacity: 1;
 }
 
 h1, h2 {
     color: #444;
-}
-
-textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
 }
 
 button {
@@ -29,10 +75,46 @@ button {
     padding: 10px 20px;
     cursor: pointer;
     margin-right: 10px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+.register-button {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.register-button:hover {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.trust-score {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    animation: blink 1s infinite;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+}
+
+.export-button {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.generate-button {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 #visualization {
@@ -41,10 +123,201 @@ button:hover {
     background-color: white;
     border: 1px solid #ddd;
     padding: 10px;
+    border-radius: 5px;
 }
 
 #export-section, #inference-section {
     margin-top: 20px;
 }
 
-/* Add your custom styles here */
+#image-result, #text-result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#playground {
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#trust-score .progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#trust-score .progress {
+    width: 70%;
+    height: 20px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.model-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.model-card:hover {
+    transform: scale(1.05);
+    border-color: #6a11cb;
+}
+
+#export-section {
+    margin-top: 20px;
+}
+
+.loading-animation {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #6a11cb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animación de Carga */
+.loading-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #6a11cb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Animación de Finalización */
+.completion-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 65, 108, 0.8);
+    border-radius: 50%;
+    animation: expand 0.5s ease-out;
+}
+
+@keyframes expand {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* Notificaciones */
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    transition: top 0.5s ease;
+}
+
+.notification.success {
+    background: #28a745;
+}
+
+.notification.error {
+    background: #dc3545;
+}
+
+/* Transiciones entre Pestañas */
+.tab-content {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.tab-content.active {
+    opacity: 1;
+}
+
+/* Additional Styles for Modern Look */
+.welcome-section {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.welcome-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 1.2em;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.dashboard-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card h2 {
+    color: #6a11cb;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    color: #666;
+}
