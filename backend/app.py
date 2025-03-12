@@ -7,6 +7,7 @@ import logging
 import csv
 import json
 from io import StringIO
+from .config import Config
 
 # Ensure the openai module is installed
 try:
@@ -21,8 +22,6 @@ os.environ['PYTHONPATH'] = os.path.abspath(os.path.join(os.path.dirname(__file__
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models')))
 sys.path.append('..')
 
-# sys.path adjustment correctly maps '..\models' to "c:\Users\Canduri Franklin\source\repos\ai-forge-x\models"
-
 # Ensure the ExplanationModel and StableDiffusionModel modules exist
 try:
     from models.explanation_model import ExplanationModel
@@ -35,8 +34,10 @@ app = Flask(__name__, static_folder='../frontend_flask/static', template_folder=
 
 load_dotenv()
 
-image_api_url = os.getenv("NEBIUS_IMAGE_API")
-text_api_url = os.getenv("NEBIUS_TEXT_API")
+# Actualización de las URLs de la API
+base_url = "https://api.studio.nebius.com/v1"
+image_api_url = f"{base_url}/images/generations"  # Endpoint correcto para generación de imágenes
+text_api_url = f"{base_url}/completions"  # Endpoint correcto para generación de texto
 
 explanation_model = ExplanationModel()
 stable_diffusion_model = StableDiffusionModel()
@@ -55,18 +56,48 @@ def index():
 
 @app.route("/generate-image", methods=["POST"])
 def generate_image():
-    prompt = request.json.get("prompt")
-    logging.debug(f"Received prompt: {prompt}")
-    logging.debug(f"Using image API URL: {image_api_url}")
-    response = requests.post(image_api_url, json={"prompt": prompt})
-    logging.debug(f"External API response status: {response.status_code}")
-    logging.debug(f"External API response text: {response.text}")
     try:
-        response_json = response.json()
-    except ValueError:
-        logging.error("Invalid response from image generation API")
-        return jsonify({"error": "Invalid response from image generation API"}), 500
-    return jsonify(response_json)
+        prompt = request.json.get("prompt")
+        if not prompt:
+            return jsonify({"error": "Prompt is required"}), 400
+            
+        logging.debug(f"Received prompt: {prompt}")
+        
+        headers = {
+            "Authorization": f"Bearer {os.getenv('NEBIUS_API_KEY')}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "prompt": prompt,
+            "n": 1,
+            "size": "1024x1024"
+        }
+        
+        response = requests.post(
+            image_api_url,
+            headers=headers,
+            json=payload
+        )
+        
+        logging.debug(f"External API response status: {response.status_code}")
+        
+        if response.status_code != 200:
+            return jsonify({"error": "Error from image generation API", "details": response.text}), response.status_code
+            
+        try:
+            response_json = response.json()
+            return jsonify({
+                "image": response_json.get("data", [{}])[0].get("url", ""),
+                "explanation": "Image generated successfully"
+            })
+        except (ValueError, IndexError) as e:
+            logging.error(f"Invalid JSON response from image generation API: {str(e)}")
+            return jsonify({"error": "Invalid response from image generation API"}), 500
+            
+    except Exception as e:
+        logging.error(f"Error generating image: {str(e)}")
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
 @app.route("/generate-text", methods=["POST"])
 def generate_text():
