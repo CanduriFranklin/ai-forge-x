@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_file
+from flask_cors import CORS
 import requests
 from dotenv import load_dotenv
 import os
@@ -7,7 +8,7 @@ import logging
 import csv
 import json
 from io import StringIO
-from .config import Config
+from config import Config  # Cambiado de .config a config
 
 # Ensure the openai module is installed
 try:
@@ -31,6 +32,8 @@ except ImportError as e:
     sys.exit(1)
 
 app = Flask(__name__, static_folder='../frontend_flask/static', template_folder='../frontend_flask/templates')
+CORS(app)  # Habilitando CORS para todas las rutas
+app.config.from_object(Config)
 
 load_dotenv()
 
@@ -58,42 +61,69 @@ def index():
 def generate_image():
     try:
         prompt = request.json.get("prompt")
+        # Customizable parameters
+        width = request.json.get("width", 512)
+        height = request.json.get("height", 512)
+        steps = request.json.get("steps", 30)
+        negative_prompt = request.json.get("negative_prompt", "")
+        seed = request.json.get("seed", -1)
+        
         if not prompt:
             return jsonify({"error": "Prompt is required"}), 400
             
         logging.debug(f"Received prompt: {prompt}")
+        logging.debug(f"Parameters: width={width}, height={height}, steps={steps}, negative_prompt='{negative_prompt}', seed={seed}")
         
-        headers = {
-            "Authorization": f"Bearer {os.getenv('NEBIUS_API_KEY')}",
-            "Content-Type": "application/json"
-        }
-        
-        payload = {
-            "prompt": prompt,
-            "n": 1,
-            "size": "1024x1024"
-        }
-        
-        response = requests.post(
-            image_api_url,
-            headers=headers,
-            json=payload
-        )
-        
-        logging.debug(f"External API response status: {response.status_code}")
-        
-        if response.status_code != 200:
-            return jsonify({"error": "Error from image generation API", "details": response.text}), response.status_code
-            
         try:
-            response_json = response.json()
-            return jsonify({
-                "image": response_json.get("data", [{}])[0].get("url", ""),
-                "explanation": "Image generated successfully"
-            })
-        except (ValueError, IndexError) as e:
-            logging.error(f"Invalid JSON response from image generation API: {str(e)}")
-            return jsonify({"error": "Invalid response from image generation API"}), 500
+            # Analyze prompt for explanations
+            prompt_keywords = [word.strip() for word in prompt.replace(',', ' ').split() if len(word.strip()) > 3]
+            key_elements = prompt_keywords[:5]  # Main elements for explanation
+            
+            response = client.images.generate(
+                model="stability-ai/sdxl",
+                response_format="url",
+                extra_body={
+                    "response_extension": "webp",
+                    "width": width,
+                    "height": height,
+                    "num_inference_steps": steps,
+                    "negative_prompt": negative_prompt,
+                    "seed": seed
+                },
+                prompt=prompt
+            )
+            
+            logging.debug(f"API response: {response}")
+            
+            # Extract image URL from response
+            if hasattr(response, 'data') and len(response.data) > 0:
+                image_url = response.data[0].url
+                
+                # Create detailed explanation
+                explanation = {
+                    "process": f"Image generated using Stable Diffusion XL model",
+                    "parameters": {
+                        "resolution": f"{width}x{height} pixels",
+                        "inference steps": steps,
+                        "negative prompt": negative_prompt if negative_prompt else "No negative prompt used",
+                        "seed": "Random" if seed == -1 else seed
+                    },
+                    "key_elements": f"The image focused on representing: {', '.join(key_elements)}",
+                    "interpretation": f"The AI interpreted your prompt by focusing primarily on the visual elements described. "
+                                     f"The style and composition were determined from the keywords in your prompt.",
+                    "suggestions": "For more specific results, try including detailed descriptions of style, lighting, and composition."
+                }
+                
+                return jsonify({
+                    "image": image_url,
+                    "explanation": explanation
+                })
+            else:
+                return jsonify({"error": "No image URL in response"}), 500
+                
+        except Exception as e:
+            logging.error(f"API error: {str(e)}")
+            return jsonify({"error": f"Error from image generation API: {str(e)}"}), 500
             
     except Exception as e:
         logging.error(f"Error generating image: {str(e)}")
@@ -101,9 +131,43 @@ def generate_image():
 
 @app.route("/generate-text", methods=["POST"])
 def generate_text():
-    prompt = request.json.get("prompt")
-    response = requests.post(text_api_url, json={"prompt": prompt})
-    return jsonify(response.json())
+    try:
+        prompt = request.json.get("prompt")
+        if not prompt:
+            return jsonify({"error": "Prompt is required"}), 400
+            
+        logging.debug(f"Received text prompt: {prompt}")
+        
+        try:
+            response = client.chat.completions.create(
+                model="meta-llama/Meta-Llama-3.1-70B-Instruct-fast",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=1024,
+                temperature=0.7,
+                top_p=0.9,
+                extra_body={
+                    "top_k": 50
+                }
+            )
+            
+            logging.debug(f"API response: {response}")
+            
+            if hasattr(response, 'choices') and len(response.choices) > 0:
+                generated_text = response.choices[0].message.content
+                return jsonify({
+                    "text": generated_text,
+                    "explanation": "Text generated successfully"
+                })
+            else:
+                return jsonify({"error": "No text in response"}), 500
+                
+        except Exception as e:
+            logging.error(f"API error: {str(e)}")
+            return jsonify({"error": f"Error from text generation API: {str(e)}"}), 500
+            
+    except Exception as e:
+        logging.error(f"Error generating text: {str(e)}")
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
 
 @app.route("/generate", methods=["POST"])
 def generate():
