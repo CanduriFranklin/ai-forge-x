@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/CanduriFranklin/ai-forge-x#readme",
   "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-scripts": "latest",
     "@material-ui/core": "latest",
     "@testing-library/react": "latest"
@@ -49,6 +49,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "cacheDirectory": "C:\\Users\\Canduri Franklin\\AppData\\Local\\npm-cache\\_logs\\"
+  }
 }
