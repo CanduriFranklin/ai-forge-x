@@ -46,23 +46,62 @@ body {
     overflow-y: auto;
 }
 
-/* Welcome section */
+/* Welcome section with animated background */
 .welcome-section {
     text-align: center;
     padding: 30px;
-    background: white;
+    background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para ver el video detrás */
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+    position: relative;
+    z-index: 1; /* Aseguramos que esté encima del video */
 }
 
-.welcome-section h1 {
-    color: #2c3e50;
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Nueva clase para la imagen visible de fondo */
+.welcome-bg {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.welcome-section img.logo {
+    width: 100px;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.welcome-section .icon {
+    font-size: 50px;
+    color: #3498db;
     margin-bottom: 15px;
 }
 
+.welcome-section img.background {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.welcome-buttons {
+    margin-top: 20px;
+}
+
 .start-button {
-    background: #3498db;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -73,7 +112,7 @@ body {
 }
 
 .start-button:hover {
-    background: #2980b9;
+    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
     transform: translateY(-2px);
 }
 
@@ -91,12 +130,18 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.model-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .model-section h2 {
     color: #2c3e50;
     margin-bottom: 15px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* Input areas */
@@ -558,4 +603,164 @@ textarea:focus {
     #content {
         padding: 15px;
     }
+}
+
+/* Flyer tab styles */
+.flyer-tab {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    z-index: 1001;
+    transition: top 0.3s ease;
+}
+
+.flyer-tab img {
+    max-height: 70px;
+    vertical-align: middle;
+}
+
+.flyer-tab .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.flyer-tab.hidden {
+    top: -100px;
+}
+
+.indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+/* Flyer tab styles ampliados */
+.flyer-tab {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    z-index: 1001;
+    transition: top 0.3s ease;
+}
+
+.flyer-tab img {
+    max-height: 70px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.flyer-tab .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.flyer-tab.hidden {
+    top: -150px;
+}
+
+/* Registro en flyer */
+.registration-form {
+    margin-top: 20px;
+}
+
+.registration-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.registration-form form input {
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.registration-form form button {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.registration-form form button:hover {
+    transform: translateY(-3px);
+}
+
+/* Animated Model Icon */
+.model-icon-animation {
+    width: 80px;
+    height: 80px;
+    margin: 20px auto 0;
+    display: block;
+    animation: iconRotate 4s linear infinite;
+}
+
+@keyframes iconRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Background layer */
+.background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Aseguramos que el video esté en el fondo */
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Aseguramos que el video esté detrás de todo */
 }

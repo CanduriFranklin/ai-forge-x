@@ -1,5 +1,5 @@
 import unittest
-from backend.app import app
+from frontend_flask.app import app  # Corregido el path del módulo
 
 class TestApp(unittest.TestCase):
     def setUp(self):

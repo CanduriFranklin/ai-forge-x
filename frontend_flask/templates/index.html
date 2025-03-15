@@ -70,26 +70,286 @@
             top: -18px;
             font-size: 0.8em;
         }
+
+        .welcome-section {
+            text-align: center;
+            padding: 30px;
+            /* background: white; */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .welcome-section img.logo {
+            width: 100px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-section .icon {
+            font-size: 50px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .welcome-section img.background {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-buttons {
+            margin-top: 20px;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-button:hover {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            transform: translateY(-2px);
+        }
+
+        .model-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .model-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .model-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .input-area {
+            margin-bottom: 15px;
+        }
+
+        .input-area textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 60px;
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-area textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .primary-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .generation-mode {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .generation-mode h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .mode-selector input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .model-type-selector {
+            padding-top: 8px;
+            border-top: 1px solid #eee;
+        }
+
+        .model-type-selector label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .model-type-selector select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .customization-controls {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .customization-controls h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .control-group {
+            margin-bottom: 8px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .control-group select,
+        .control-group input[type="text"],
+        .control-group input[type="number"] {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            margin-right: 4px;
+        }
+
+        .control-group output {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #3498db;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+        }
+
+        /* Ajuste para bajar el contenido por el flyer */
+        #root {
+            margin-top: 120px;
+        }
     </style>
 </head>
 <body>
-    <div id="root">
+    
+    <div id="root" style="margin-top: 50px;">  <!-- se baja un poco el contenido si es necesario -->
         <!-- Sidebar -->
         <div id="sidebar">
             <button class="tab active" data-tab="welcome">Welcome</button>
-            <button class="tab" data-tab="models">AI Models</button>
+            <!-- Removed AI Models button -->
             <button class="tab" data-tab="export">Export</button>
         </div>
 
         <!-- Content -->
         <div id="content">
-            <!-- Welcome Tab -->
+            <!-- Welcome Tab: registration form -->
             <div id="welcome" class="tab-content active">
+                <div class="background-layer">
+                    <!-- Video de fondo -->
+                    <video autoplay muted loop id="background-video">
+                        <source src="/static/vecteezy_futuristic-digital-landscape-with-vibrant-neon-colors_49798084.mov" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
                 <div class="welcome-section">
+                    <!-- Eliminamos o comentamos la imagen de fondo anterior -->
+                    <!-- <img class="welcome-bg" src="/static/diagramas-flujo-datos-aprendizaje-automatico_1300627-1216.jpg" alt="Welcome Background"> -->
+
                     <h1>Welcome to AI ForgeX Suite</h1>
-                    <p>Your trusted solution for AI-powered content generation</p>
-                    <div class="welcome-buttons">
-                        <button class="start-button" onclick="switchTab('models')">Start Creating</button>
+                    <h3>Register to start creating and interacting with our models</h3>
+                    <div class="registration-form">
+                        <form id="register-form" action="#" onsubmit="registerUser(event)">
+                            <input type="text" name="nombre" placeholder="Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <div class="form-buttons" style="display: flex; gap: 10px; justify-content: center;">
+                                <button type="submit" class="primary-button">Register</button>
+                                <button type="button" class="primary-button" onclick="signInUser()">Sign In</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -186,6 +446,8 @@
                                 <button id="reset-view" title="Reset View"><span>⟲</span></button>
                             </div>
                         </div>
+                        <!-- Animated Model Icon -->
+                        <img class="model-icon-animation" src="/static/ser03_img01@2x.png" alt="Animated Model Icon">
                     </div>
 
                     <!-- Text Generation Section -->
@@ -272,6 +534,17 @@
     <!-- Notification Area -->
     <div id="notification" class="notification"></div>
 
+    <script>
+        function registerUser(e) {
+            e.preventDefault();
+            // Register user logic here
+            switchTab('models');
+        }
+        function signInUser() {
+            // Sign in logic here
+            switchTab('models');
+        }
+    </script>
     <script src="/static/Generate.js"></script>
 </body>
 </html>

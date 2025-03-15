@@ -942,3 +942,81 @@ function displayExamplePrompts() {
 window.displayExamplePrompts = displayExamplePrompts;
 
 window.switchTab = switchTab;
+
+async function generateImage() {
+    const prompt = document.getElementById('image-prompt').value;
+    const width = document.getElementById('image-width').value;
+    const height = document.getElementById('image-height').value;
+    const steps = document.getElementById('inference-steps').value;
+    const negativePrompt = document.getElementById('negative-prompt').value;
+    const seed = document.getElementById('generation-seed').value;
+
+    const requestData = {
+        prompt: prompt,
+        width: parseInt(width),
+        height: parseInt(height),
+        steps: parseInt(steps),
+        negative_prompt: negativePrompt,
+        seed: parseInt(seed)
+    };
+
+    try {
+        const response = await fetch('/generate-image', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch');
+        }
+
+        const data = await response.json();
+        const imageResult = document.getElementById('image-result');
+        imageResult.innerHTML = `<img src="data:image/webp;base64,${data.image}" alt="Generated Image">`;
+    } catch (error) {
+        console.error('Error generating image:', error);
+        alert('Error generating image: ' + error.message);
+    }
+}
+
+document.getElementById('generate-image-btn').addEventListener('click', generateImage);
+
+async function generateText() {
+    const prompt = document.getElementById('text-prompt').value;
+    const temperature = parseFloat(document.getElementById('text-temperature').value);
+    const maxLength = parseInt(document.getElementById('text-max-length').value);
+
+    const requestData = {
+        prompt: prompt,
+        temperature: temperature,
+        max_tokens: maxLength
+    };
+
+    try {
+        const response = await fetch('/generate-text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to fetch');
+        }
+
+        const data = await response.json();
+        const textResult = document.getElementById('text-result');
+        textResult.innerHTML = `<div class="generated-text">${data.text}</div>`;
+    } catch (error) {
+        console.error('Error generating text:', error);
+        alert('Error generating text: ' + error.message);
+    }
+}
+
+document.getElementById('generate-text-btn').addEventListener('click', generateText);
