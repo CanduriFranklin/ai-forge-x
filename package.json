@@ -26,11 +26,13 @@
   },
   "homepage": "https://github.com/CanduriFranklin/ai-forge-x#readme",
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "latest",
-    "@material-ui/core": "latest",
-    "@testing-library/react": "latest"
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.11",
+    "@testing-library/react": "latest",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-scripts": "^5.0.1"
   },
   "eslintConfig": {
     "extends": [

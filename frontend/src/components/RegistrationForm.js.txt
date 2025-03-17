@@ -1,0 +1,20 @@
+import React from 'react';
+import '../styles/global.css'; // Importa el archivo CSS global
+
+function RegistrationForm() {
+  return (
+    <form className="registration-form">
+      <label>
+        Nombre de usuario:
+        <input type="text" name="username" />
+      </label>
+      <label>
+        Contraseña:
+        <input type="password" name="password" />
+      </label>
+      <button type="submit">Registrarse</button>
+    </form>
+  );
+}
+
+export default RegistrationForm;

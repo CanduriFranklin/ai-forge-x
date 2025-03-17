@@ -1,0 +1,18 @@
+import React from 'react';
+import RegistrationForm from './RegistrationForm';
+import '../styles/global.css'; // Importa el archivo CSS global
+
+function WelcomeSection() {
+  return (
+    <div className="welcome-section">
+      <div className="animation-background">
+        {/* Aquí va el código para la animación de fondo */}
+      </div>
+      <div className="registration-overlay">
+        <RegistrationForm />
+      </div>
+    </div>
+  );
+}
+
+export default WelcomeSection;

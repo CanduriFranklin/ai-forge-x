@@ -1,104 +1,132 @@
-# AI ForgeX Suite - Proyecto Ejecutivo
+# AI ForgeX Suite - Executive Summary
 
-## Resumen Ejecutivo
+## Executive Summary
 
-AI ForgeX Suite es una plataforma integral diseñada para reimaginar herramientas populares de IA con transparencia y control del usuario como elementos fundamentales. Desarrollada como respuesta al hackathon "Rebuild: The Open AI Tool Challenge", la plataforma desafía la noción de que los sistemas complejos de IA deben ser opacos para funcionar eficazmente.
+AI ForgeX Suite is a comprehensive platform designed to reimagine popular AI tools with transparency and user control as fundamental elements. Developed in response to the "Rebuild: The Open AI Tool Challenge" hackathon, the platform challenges the notion that complex AI systems must be opaque to function effectively.
 
-## Visión General
+## Overview
 
-### Solución al Desafío
-El proyecto aborda directamente los requisitos clave del hackathon mediante la implementación de:
+### Solution to the Challenge
+The project directly addresses the key requirements of the hackathon by implementing:
 
-1. **Generador de Imágenes Transparente**
-   - Generación de imágenes basadas en texto con explicaciones detalladas del proceso
-   - Visualización clara de cómo cada elemento del prompt afecta el resultado final
+1. **Transparent Image Generator**
+   - Text-based image generation with detailed process explanations
+   - Clear visualization of how each element of the prompt affects the final result
 
-2. **Modelo de Lenguaje Transparente**
-   - Generación de texto con explicación del razonamiento
-   - Atribución clara de fuentes cuando corresponde
-   - Control sobre tono, estilo y nivel de formalidad
+2. **Transparent Language Model**
+   - Text generation with reasoning explanation
+   - Clear source attribution when applicable
+   - Control over tone, style, and formality
 
-### Diferenciadores Clave
+### Key Differentiators
 
-- **Explicaciones Incorporadas:** Cada salida viene con una explicación detallada de cómo se generó
-- **Control Granular:** Los usuarios pueden ajustar parámetros específicos para personalizar los resultados
-- **Interfaz Intuitiva:** Diseño centrado en el usuario para facilitar la interacción con herramientas avanzadas
-- **Documentación Completa:** Guías detalladas para usuarios y desarrolladores
+- **Built-in Explanations:** Each output comes with a detailed explanation of how it was generated
+- **Granular Control:** Users can adjust specific parameters to customize the results
+- **Intuitive Interface:** User-centered design to facilitate interaction with advanced tools
+- **Comprehensive Documentation:** Detailed guides for users and developers
 
-## Tecnologías Utilizadas
+## Technologies Used
 
-- **Nebius Studio:** Plataforma principal para el desarrollo y despliegue del proyecto
-- **Modelos de IA:**
-  - Stable Diffusion XL para generación de imágenes
-  - Meta LLaMA 3.1 para generación de texto
-- **Backend:** Servidor Python utilizando Flask
-- **Frontend:** HTML, CSS y JavaScript servidos a través de Flask
+- **Nebius Studio:** Main platform for project development and deployment
+- **AI Models:**
+  - Stable Diffusion XL for image generation
+  - Meta LLaMA 3.1 for text generation
+- **Backend:** .NET server
+- **Frontend:** React, JavaScript
 
-## Componentes de la Solución
+## Solution Components
 
 ### Backend
-- API RESTful para generación de contenido
-- Enrutamiento y manejo de solicitudes
-- Integración con modelos de IA
-- Gestión de errores transparente
+- RESTful API for content generation
+- Routing and request handling
+- Integration with AI models
+- Transparent error management
 
 ### Frontend
-- Interfaz de usuario limpia y accesible
-- Tres secciones principales: Bienvenida, Modelos de IA y Exportación
-- Visualización de resultados generados y explicaciones
-- Notificaciones y feedback visual
+- Clean and accessible user interface
+- Three main sections: Welcome, AI Models, and Export
+- Visualization of generated results and explanations
+- Notifications and visual feedback
 
-### Documentación
-- Arquitectura del sistema
-- Guía del usuario
-- Guía del desarrollador
-- Características de transparencia y personalización
+### Documentation
+- System architecture
+- User guide
+- Developer guide
+- Transparency and customization features
 
-## Impacto y Beneficios
+## Impact and Benefits
 
-### Para Usuarios
-- Mayor comprensión de cómo funcionan los sistemas de IA
-- Control sobre cómo se generan los resultados
-- Capacidad para refinar y personalizar salidas
-- Herramientas educativas integradas
+### For Users
+- Greater understanding of how AI systems work
+- Control over how results are generated
+- Ability to refine and customize outputs
+- Integrated educational tools
 
-### Para el Ecosistema de IA
-- Demostración de que la transparencia no sacrifica el rendimiento
-- Nuevo paradigma para interfaces de usuario de IA
-- Promoción de prácticas éticas en el desarrollo de IA
-- Reducción de la desconfianza en sistemas de "caja negra"
+### For the AI Ecosystem
+- Demonstration that transparency does not sacrifice performance
+- New paradigm for AI user interfaces
+- Promotion of ethical practices in AI development
+- Reduction of distrust in "black box" systems
 
-## Casos de Uso
+## Use Cases
 
-### Educación
-- Explicación de conceptos complejos con generación de texto e imágenes transparente
-- Herramientas para profesores para crear material educativo personalizado
+### Education
+- Explanation of complex concepts with transparent text and image generation
+- Tools for teachers to create personalized educational material
 
-### Diseño y Creatividad
-- Generación de imágenes con control preciso sobre elementos específicos
-- Iteración rápida con explicaciones claras de los cambios
+### Design and Creativity
+- Image generation with precise control over specific elements
+- Rapid iteration with clear explanations of changes
 
-### Investigación y Análisis
-- Generación de contenido con atribución clara de fuentes
-- Comprensión de cómo se forman conclusiones a partir de datos
+### Research and Analysis
+- Content generation with clear source attribution
+- Understanding how conclusions are drawn from data
 
-## Camino a Seguir
+## Roadmap
 
-### Corto Plazo (1-3 meses)
-- Mejoras en la interfaz de usuario
-- Adición de controles avanzados para parámetros de generación
-- Soporte para más formatos de exportación
+### Short Term (1-3 months)
+- User interface improvements
+- Addition of advanced controls for generation parameters
+- Support for more export formats
 
-### Mediano Plazo (3-6 meses)
-- Integración de más modelos de IA
-- Desarrollo de herramientas de colaboración
-- Implementación de perfiles de usuario para guardar preferencias
+### Medium Term (3-6 months)
+- Integration of more AI models
+- Development of collaboration tools
+- Implementation of user profiles to save preferences
 
-### Largo Plazo (6-12 meses)
-- Desarrollo de una API pública
-- Creación de una comunidad de usuarios
-- Expansión a más casos de uso especializados
+### Long Term (6-12 months)
+- Development of a public API
+- Creation of a user community
+- Expansion to more specialized use cases
 
-## Conclusión
+## Conclusion
 
-AI ForgeX Suite demuestra que es posible crear herramientas de IA poderosas que también sean transparentes y personalizables. Al proporcionar explicaciones claras y control granular, el proyecto establece un nuevo estándar para interfaces de IA centradas en el usuario, cumpliendo y superando los objetivos del hackathon "Rebuild".
+AI ForgeX Suite demonstrates that it is possible to create powerful AI tools that are also transparent and customizable. By providing clear explanations and granular control, the project sets a new standard for user-centered AI interfaces, meeting and exceeding the goals of the "Rebuild" hackathon.
+
+## Test Plan
+
+### Test Objectives
+- Validate the functionality of image and text generation.
+- Ensure the transparency and accuracy of the generated explanations.
+- Verify the usability of the user interface.
+
+### Test Cases
+1. **Image Generation**
+   - Test image generation with different prompts.
+   - Verify the accuracy of the generated explanations.
+   - Evaluate the ability to adjust parameters.
+
+2. **Text Generation**
+   - Test text generation with different prompts.
+   - Verify the clarity and accuracy of the explanations.
+   - Evaluate control over tone, style, and formality.
+
+3. **User Interface**
+   - Test navigation and usability of the interface.
+   - Verify the visualization of results and explanations.
+   - Evaluate the system's response to different user inputs.
+
+### Test Results
+- Document the results of each test case.
+- Identify and correct any errors or issues found.
+- Update the documentation with the test results.

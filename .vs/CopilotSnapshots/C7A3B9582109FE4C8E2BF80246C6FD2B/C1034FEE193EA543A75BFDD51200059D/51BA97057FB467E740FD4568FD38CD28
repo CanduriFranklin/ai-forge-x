@@ -1,0 +1,50 @@
+﻿# AI ForgeX Suite
+
+Rebuild Open AI Tools
+
+## Installation
+
+npm install
+
+## Running Tests
+
+npm test
+
+## Running the Application
+
+### Frontend
+
+npm install
+npm start
+
+### Backend (Flask)
+
+pip install -r backend/requirements.txt && flask run
+
+## Plan de Pruebas
+
+### Objetivos de Pruebas
+- Validar la funcionalidad de generación de imágenes y textos.
+- Asegurar la transparencia y precisión de las explicaciones generadas.
+- Verificar la usabilidad de la interfaz de usuario.
+
+### Casos de Prueba
+1. **Generación de Imágenes**
+   - Probar la generación de imágenes con diferentes prompts.
+   - Verificar la exactitud de las explicaciones generadas.
+   - Evaluar la capacidad de ajuste de parámetros.
+
+2. **Generación de Textos**
+   - Probar la generación de textos con diferentes prompts.
+   - Verificar la claridad y precisión de las explicaciones.
+   - Evaluar el control sobre tono, estilo y formalidad.
+
+3. **Interfaz de Usuario**
+   - Probar la navegación y usabilidad de la interfaz.
+   - Verificar la visualización de resultados y explicaciones.
+   - Evaluar la respuesta del sistema a diferentes entradas de usuario.
+
+### Resultados de Pruebas
+- Documentar los resultados de cada caso de prueba.
+- Identificar y corregir cualquier error o problema encontrado.
+- Actualizar la documentación con los resultados de las pruebas.

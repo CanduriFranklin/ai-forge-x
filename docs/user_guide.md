@@ -14,6 +14,14 @@ Welcome to AI ForgeX Suite, your solution for transparent and customizable AI co
 1. The application can be accessed at `http://localhost:5001` when running locally
 2. The backend API runs separately at `http://localhost:5000`
 
+### Installation
+
+### Running the Application
+
+#### Frontend
+
+#### Backend (.NET)
+
 ## Main Interface
 
 The AI ForgeX Suite interface is divided into three main sections:
@@ -134,3 +142,31 @@ Future versions will support:
 - Generating multiple images or texts with variations
 - Comparing results from different parameter settings
 - A/B testing of different prompts
+
+## Test Plan
+
+### Test Objectives
+- Validate the functionality of image and text generation.
+- Ensure the transparency and accuracy of the generated explanations.
+- Verify the usability of the user interface.
+
+### Test Cases
+1. **Image Generation**
+   - Test image generation with different prompts.
+   - Verify the accuracy of the generated explanations.
+   - Evaluate the ability to adjust parameters.
+
+2. **Text Generation**
+   - Test text generation with different prompts.
+   - Verify the clarity and accuracy of the explanations.
+   - Evaluate control over tone, style, and formality.
+
+3. **User Interface**
+   - Test navigation and usability of the interface.
+   - Verify the visualization of results and explanations.
+   - Evaluate the system's response to different user inputs.
+
+### Test Results
+- Document the results of each test case.
+- Identify and correct any errors or issues found.
+- Update the documentation with the test results.
